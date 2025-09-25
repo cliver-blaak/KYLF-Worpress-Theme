@@ -1,10 +1,11 @@
 <?php
-add_action( 'wp_enqueue_scripts', 'streamit_enqueue_styles' ,99);
+add_action( 'wp_enqueue_scripts', 'streamit_enqueue_styles', 99 );
 
 function streamit_enqueue_styles() {
-    $parent_style = 'parent-style'; // This is 'streamit-style' for the Streamit theme.
-    wp_enqueue_style( 'parent-style', get_stylesheet_directory_uri() . '/style.css'); 
-    wp_enqueue_style( 'child-style',get_stylesheet_directory_uri() . '/style.css');
+    $parent_style = 'streamit-style';
+
+    wp_enqueue_style( $parent_style, get_template_directory_uri() . '/style.css' );
+    wp_enqueue_style( 'child-style', get_stylesheet_directory_uri() . '/style.css', array( $parent_style ), wp_get_theme()->get( 'Version' ) );
 }
 
 function streamit_child_theme_setup() {
